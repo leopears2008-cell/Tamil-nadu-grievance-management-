@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: nivaranai-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build:server
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVE_CLIENT
+        value: "false"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: FIRESTORE_DATABASE_ID
+        sync: false
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
