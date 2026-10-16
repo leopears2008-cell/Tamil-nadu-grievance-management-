@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "Grievance": {
+      "title": "Grievance",
+      "description": "A citizen complaint",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "trackId": { "type": "string" },
+        "citizenId": { "type": "string" },
+        "citizenName": { "type": "string" },
+        "citizenPhone": { "type": "string" },
+        "citizenEmail": { "type": "string" },
+        "language": { "type": "string" },
+        "originalTranscript": { "type": "string" },
+        "summaryEn": { "type": "string" },
+        "summaryTa": { "type": "string" },
+        "category": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "departmentName": { "type": "string" },
+        "priority": { "type": "string" },
+        "priorityReason": { "type": "string" },
+        "confidenceScore": { "type": "number" },
+        "status": { "type": "string" },
+        "assignedOfficerId": { "type": "string" },
+        "assignedOfficerName": { "type": "string" },
+        "assignedOfficerPhone": { "type": "string" },
+        "assignedAt": { "type": "string", "format": "date-time" },
+        "targetResolutionDate": { "type": "string", "format": "date-time" },
+        "resolvedAt": { "type": "string", "format": "date-time" },
+        "resolutionRemarks": { "type": "string" },
+        "resolutionEvidenceUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "trackId", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "grievances/{grievanceId}": {
+      "schema": { "$ref": "#/entities/Grievance" },
+      "description": "Complaints filed by citizens"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() { return request.auth != null; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidGrievance(data) {
+      return data.keys().hasAll(['id', 'trackId', 'status', 'createdAt']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.trackId is string && data.trackId.size() <= 64 &&
+        data.status is string && data.status.size() <= 64 &&
+        data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    match /grievances/{grievanceId} {
+      // Allow read for everyone for MVP (so anyone can track their grievance)
+      allow get: if isValidId(grievanceId);
+      allow list: if true;
+
+      allow create: if 
+        isValidId(grievanceId) &&
+        isValidGrievance(incoming()) &&
+        incoming().id == grievanceId;
+
+      allow update: if 
+        isValidId(grievanceId) &&
+        isValidGrievance(incoming()) &&
+        incoming().id == existing().id &&
+        incoming().trackId == existing().trackId;
+        
+      allow delete: if false;
+    }
+  }
+}

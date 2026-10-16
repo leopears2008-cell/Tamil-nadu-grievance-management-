@@ -1,0 +1,49 @@
+{
+  "name": "nivaranai-grievance-platform",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node scripts/start-server.mjs",
+    "preview": "vite preview",
+    "clean": "rm -rf dist server.js",
+    "lint": "tsc --noEmit",
+    "test": "node --import tsx --test tests/supabase.migration.test.ts tests/wikimedia.test.ts tests/news.test.ts tests/tnMinisters.test.ts tests/grievance.chatbot.test.ts tests/site.settings.test.ts tests/ai.evaluation.test.ts tests/grievance.intelligence.test.ts tests/e2e.workflow.test.ts tests/production.hardening.test.ts tests/civic.features.test.ts tests/hero.cinematic.test.ts",
+    "provision-admin": "node scripts/provision-admin.mjs",
+    "migrate:firestore-to-supabase": "node scripts/migrate-firestore-to-supabase.mjs",
+    "build:client": "vite build --configLoader runner",
+    "build:server": "node scripts/build-server.mjs",
+    "evaluate:ai": "tsx scripts/run-ai-evaluation.ts",
+    "test:e2e": "node --import tsx --test tests/e2e.workflow.test.ts",
+    "validate:production": "node scripts/validate-production.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "canvas-confetti": "^1.9.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "firebase": "^12.18.0",
+    "firebase-admin": "^13.5.0",
+    "lucide-react": "^0.546.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/express": "^4.17.21",
+    "bun-types": "^1.2.0",
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  }
+}
+

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "water-001",
+    "query": "pipe burst water leakage",
+    "relevantIds": [
+      "dept-water-001",
+      "dept-water-002"
+    ]
+  },
+  {
+    "id": "road-001",
+    "query": "large pothole main road",
+    "relevantIds": [
+      "dept-roads-001"
+    ]
+  },
+  {
+    "id": "health-001",
+    "query": "mosquito stagnant water dengue",
+    "relevantIds": [
+      "dept-health-001",
+      "dept-health-002"
+    ]
+  }
+]

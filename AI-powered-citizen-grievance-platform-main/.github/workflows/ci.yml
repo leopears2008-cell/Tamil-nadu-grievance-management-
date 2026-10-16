@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - name: Install dependencies with frozen lockfile
+        run: bun install --frozen-lockfile
+
+      - name: Type-check
+        run: bun run lint
+
+      - name: Run tests
+        run: bun run test
+
+      - name: Run production hardening tests
+        run: bunx tsx --test tests/production.hardening.test.ts
+
+      - name: Run AI evaluation gate
+        run: bun run evaluate:ai
+
+      - name: Run E2E workflow tests
+        run: bun run test:e2e
+
+      - name: Validate production configuration contract
+        run: bun run validate:production
+
+      - name: Build production assets and server
+        run: bun run build
