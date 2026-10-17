@@ -568,4 +568,237 @@ Rename `003_site_settings.sql` to `002_site_settings.sql`. It depends on nothing
 4. Replace source-string tests with behaviour tests: API authorization per role, a Tamil golden set, and at least one RLS test against a local Supabase.
 5. Add a Content-Security-Policy in report-only mode first (F-16), then enforce it.
 6. Rename `PRODUCTION_10_10.md` to a checklist and drop the claim until an audit supports it (F-14). Pick `npm` or `bun` and use it everywhere.
-7. Add a `LICENSE` file and a `SECURITY.md` with a reporting contact.      
+7. Add a `LICENSE` file and a `SECURITY.md` with a reporting contact.
+8.  
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380" role="img" aria-labelledby="t d">
+  <title id="t">Tamil-nadu-grievance-management - Report. Route. Resolve.</title>
+  <desc id="d">Animated wordmark for the Tamil Nadu grievance management repository, an AI-assisted public grievance redressal platform for Tamil Nadu.</desc>
+  <style>
+    .l{font:700 56px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:middle;animation:drop .75s cubic-bezier(.2,.8,.2,1) both}
+    .l.ai{fill:#E7A817}
+    .t{font:500 26px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#D4D4D8;text-anchor:middle;animation:pop .01s steps(1) both}
+    .t.dot{fill:#E7A817}
+    .tag{font:500 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:3px;fill:#A1A1AA;animation:fade .8s ease .1s both}
+    .foot{font:500 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:2px;fill:#71717A;text-anchor:middle;animation:fade .9s ease 2.79s both}
+    .rule{stroke:#E7A817;stroke-width:3;stroke-linecap:round;stroke-dasharray:1054;animation:draw .9s cubic-bezier(.6,0,.2,1) 1.2s both}
+    .mark{animation:fade 1s ease .5s both}
+    .cur{fill:#E7A817;opacity:0;animation:blink 1.1s steps(1) 2.73s infinite}
+    @keyframes drop{0%{opacity:0;transform:translateY(-38px)}60%{opacity:1;transform:translateY(7px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes pop{from{opacity:0}to{opacity:1}}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
+    @keyframes draw{from{stroke-dashoffset:1054}to{stroke-dashoffset:0}}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}.cur{opacity:0}}
+  </style>
+  <defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#fff" fill-opacity=".055"/></pattern></defs>
+  <rect x=".5" y=".5" width="1199" height="379" rx="18" fill="#09090B" stroke="#fff" stroke-opacity=".10"/>
+  <rect x=".5" y=".5" width="1199" height="379" rx="18" fill="url(#dots)"/>
+  <line x1="28" y1="1" x2="1172" y2="1" stroke="#fff" stroke-opacity=".14"/>
+  <text class="tag" x="60" y="62">PUBLIC GRIEVANCE REDRESSAL  /  TAMIL NADU</text>
+  <g>
+    <text class="l ai" x="90.0" y="200" style="animation-delay:0.25s">T</text>
+    <text class="l ai" x="124.0" y="200" style="animation-delay:0.31s">a</text>
+    <text class="l ai" x="158.0" y="200" style="animation-delay:0.37s">m</text>
+    <text class="l ai" x="192.0" y="200" style="animation-delay:0.43s">i</text>
+    <text class="l ai" x="226.0" y="200" style="animation-delay:0.49s">l</text>
+    <text class="l ai" x="260.0" y="200" style="animation-delay:0.55s">-</text>
+    <text class="l ai" x="294.0" y="200" style="animation-delay:0.61s">n</text>
+    <text class="l ai" x="328.0" y="200" style="animation-delay:0.67s">a</text>
+    <text class="l ai" x="362.0" y="200" style="animation-delay:0.73s">d</text>
+    <text class="l ai" x="396.0" y="200" style="animation-delay:0.79s">u</text>
+    <text class="l ai" x="430.0" y="200" style="animation-delay:0.85s">-</text>
+    <text class="l" x="464.0" y="200" style="animation-delay:0.91s">g</text>
+    <text class="l" x="498.0" y="200" style="animation-delay:0.97s">r</text>
+    <text class="l" x="532.0" y="200" style="animation-delay:1.03s">i</text>
+    <text class="l" x="566.0" y="200" style="animation-delay:1.09s">e</text>
+    <text class="l" x="600.0" y="200" style="animation-delay:1.15s">v</text>
+    <text class="l" x="634.0" y="200" style="animation-delay:1.21s">a</text>
+    <text class="l" x="668.0" y="200" style="animation-delay:1.27s">n</text>
+    <text class="l" x="702.0" y="200" style="animation-delay:1.33s">c</text>
+    <text class="l" x="736.0" y="200" style="animation-delay:1.39s">e</text>
+    <text class="l" x="770.0" y="200" style="animation-delay:1.45s">-</text>
+    <text class="l" x="804.0" y="200" style="animation-delay:1.51s">m</text>
+    <text class="l" x="838.0" y="200" style="animation-delay:1.57s">a</text>
+    <text class="l" x="872.0" y="200" style="animation-delay:1.63s">n</text>
+    <text class="l" x="906.0" y="200" style="animation-delay:1.69s">a</text>
+    <text class="l" x="940.0" y="200" style="animation-delay:1.75s">g</text>
+    <text class="l" x="974.0" y="200" style="animation-delay:1.81s">e</text>
+    <text class="l" x="1008.0" y="200" style="animation-delay:1.87s">m</text>
+    <text class="l" x="1042.0" y="200" style="animation-delay:1.93s">e</text>
+    <text class="l" x="1076.0" y="200" style="animation-delay:1.99s">n</text>
+    <text class="l" x="1110.0" y="200" style="animation-delay:2.05s">t</text>
+    </g>
+  <line class="rule" x1="73" y1="226" x2="1127" y2="226"/>
+  <g>
+    <text class="t" x="424.0" y="292" style="animation-delay:1.550s">R</text>
+    <text class="t" x="440.0" y="292" style="animation-delay:1.595s">e</text>
+    <text class="t" x="456.0" y="292" style="animation-delay:1.640s">p</text>
+    <text class="t" x="472.0" y="292" style="animation-delay:1.685s">o</text>
+    <text class="t" x="488.0" y="292" style="animation-delay:1.730s">r</text>
+    <text class="t" x="504.0" y="292" style="animation-delay:1.775s">t</text>
+    <text class="t dot" x="520.0" y="292" style="animation-delay:1.820s">.</text>
+    <text class="t" x="552.0" y="292" style="animation-delay:1.910s">R</text>
+    <text class="t" x="568.0" y="292" style="animation-delay:1.955s">o</text>
+    <text class="t" x="584.0" y="292" style="animation-delay:2.000s">u</text>
+    <text class="t" x="600.0" y="292" style="animation-delay:2.045s">t</text>
+    <text class="t" x="616.0" y="292" style="animation-delay:2.090s">e</text>
+    <text class="t dot" x="632.0" y="292" style="animation-delay:2.135s">.</text>
+    <text class="t" x="664.0" y="292" style="animation-delay:2.225s">R</text>
+    <text class="t" x="680.0" y="292" style="animation-delay:2.270s">e</text>
+    <text class="t" x="696.0" y="292" style="animation-delay:2.315s">s</text>
+    <text class="t" x="712.0" y="292" style="animation-delay:2.360s">o</text>
+    <text class="t" x="728.0" y="292" style="animation-delay:2.405s">l</text>
+    <text class="t" x="744.0" y="292" style="animation-delay:2.450s">v</text>
+    <text class="t" x="760.0" y="292" style="animation-delay:2.495s">e</text>
+    <text class="t dot" x="776.0" y="292" style="animation-delay:2.540s">.</text>
+    </g>
+  <rect class="cur" x="788" y="271" width="11" height="26" rx="1.5"/>
+  <text class="foot" x="600" y="346">TAMIL  /  ENGLISH  /  TANGLISH      AI-ASSISTED TRIAGE      SUPABASE + FIREBASE AUTH</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 12" width="1200" height="12" role="presentation" aria-hidden="true">
+  <style>
+    .p{stroke:#E7A817;stroke-width:2;stroke-linecap:round;stroke-dasharray:90 1110;animation:run 5s linear infinite}
+    @keyframes run{from{stroke-dashoffset:90}to{stroke-dashoffset:-1110}}
+    @media (prefers-reduced-motion:reduce){.p{animation:none;stroke-dasharray:90 1110;stroke-dashoffset:-555}}
+  </style>
+  <line x1="0" y1="6" x2="1200" y2="6" stroke="#71717A" stroke-opacity=".35"/>
+  <line class="p" x1="0" y1="6" x2="1200" y2="6"/>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400" role="img" aria-labelledby="st sd">
+  <title id="st">Project audit score: 60 out of 100</title>
+  <desc id="sd">Seven category scores: Architecture &amp; design 12 of 15; Security 15 of 20; Correctness &amp; code quality 12 of 20; Testing &amp; QA 8 of 15; CI/CD &amp; deployment 4 of 10; Documentation 6 of 10; Completeness of upload 3 of 10.</desc>
+  <style>
+    .ring{stroke-dasharray:490.09;animation:ring 1.4s cubic-bezier(.3,.7,.2,1) .2s both}
+    .bar{transform-box:fill-box;transform-origin:left center;animation:grow .8s cubic-bezier(.3,.7,.2,1) both}
+    .num{animation:fade .8s ease .9s both}
+    @keyframes ring{from{stroke-dashoffset:490.09}to{stroke-dashoffset:196.04}}
+    @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+  <rect x=".5" y=".5" width="859" height="399" rx="18" fill="#09090B" stroke="#fff" stroke-opacity=".10"/>
+  <line x1="28" y1="1" x2="832" y2="1" stroke="#fff" stroke-opacity=".14"/>
+  <text x="40" y="52" style="font:500 12px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:3px;fill:#A1A1AA">PROJECT AUDIT</text>
+  <text x="40" y="82" style="font:600 22px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#FAFAFA;letter-spacing:-.4px">Tamil-nadu-grievance-management, as uploaded</text>
+  <circle cx="170" cy="215" r="78" fill="none" stroke="#27272A" stroke-width="14"/>
+  <circle class="ring" cx="170" cy="215" r="78" fill="none" stroke="#E7A817" stroke-width="14" stroke-linecap="round" stroke-dashoffset="196.04" transform="rotate(-90 170 215)"/>
+  <text class="num" x="170" y="228" style="font:700 56px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:middle">60</text>
+  <text class="num" x="170" y="256" style="font:500 14px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#71717A;text-anchor:middle">/ 100</text>
+  <text x="360" y="112" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Architecture &amp; design</text>
+  <text x="820" y="112" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">12/15</text>
+  <rect x="360" y="121" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="121" width="368.0" height="8" rx="4" fill="#E7A817" style="animation-delay:0.50s"/>
+  <text x="360" y="150" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Security</text>
+  <text x="820" y="150" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">15/20</text>
+  <rect x="360" y="159" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="159" width="345.0" height="8" rx="4" fill="#E7A817" style="animation-delay:0.62s"/>
+  <text x="360" y="188" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Correctness &amp; code quality</text>
+  <text x="820" y="188" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">12/20</text>
+  <rect x="360" y="197" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="197" width="276.0" height="8" rx="4" fill="#E7A817" style="animation-delay:0.74s"/>
+  <text x="360" y="226" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Testing &amp; QA</text>
+  <text x="820" y="226" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">8/15</text>
+  <rect x="360" y="235" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="235" width="245.3" height="8" rx="4" fill="#E7A817" style="animation-delay:0.86s"/>
+  <text x="360" y="264" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">CI/CD &amp; deployment</text>
+  <text x="820" y="264" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">4/10</text>
+  <rect x="360" y="273" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="273" width="184.0" height="8" rx="4" fill="#E5484D" style="animation-delay:0.98s"/>
+  <text x="360" y="302" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Documentation</text>
+  <text x="820" y="302" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">6/10</text>
+  <rect x="360" y="311" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="311" width="276.0" height="8" rx="4" fill="#E7A817" style="animation-delay:1.10s"/>
+  <text x="360" y="340" style="font:500 14px Inter,'Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;fill:#D4D4D8">Completeness of upload</text>
+  <text x="820" y="340" style="font:600 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:end">3/10</text>
+  <rect x="360" y="349" width="460" height="8" rx="4" fill="#27272A"/>
+  <rect class="bar" x="360" y="349" width="138.0" height="8" rx="4" fill="#E5484D" style="animation-delay:1.22s"/>
+  </svg>
+  --- a/server/grievanceIntelligence.ts	2026-10-17 05:16:29.458970989 +0000
++++ b/server/grievanceIntelligence.ts	2026-10-17 05:16:29.460516306 +0000
+@@ -28,7 +28,25 @@
+ ];
+ 
+ function normalize(text: string) {
+-  return text.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}\s]/gu, ' ');
++  // \p{M} keeps Tamil vowel signs and the pulli (்), which are combining marks, not letters.
++  return text.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{M}\p{N}\s]/gu, ' ');
++}
++
++const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
++
++/**
++ * Latin terms of 3 characters or fewer must match a whole word ("min" must not match "minutes");
++ * longer Latin terms must start on a word boundary ("pothol" still matches "potholes").
++ * Tamil is agglutinative (suffixes follow the stem), so Tamil terms keep substring matching.
++ */
++function containsTerm(haystack: string, rawTerm: string): boolean {
++  const term = normalize(rawTerm).trim();
++  if (!term) return false;
++  if (/^[a-z0-9 ]+$/.test(term)) {
++    const tail = term.length <= 3 ? '(?:\\s|$)' : '';
++    return new RegExp(`(?:^|\\s)${escapeRegExp(term)}${tail}`).test(haystack);
++  }
++  return haystack.includes(term);
+ }
+ 
+ export function tokenize(text: string): string[] {
+@@ -48,7 +66,7 @@
+   const haystack = normalize(`${text} ${category || ''}`);
+   let best = { id: 'dept-sanitation', score: 0, label: 'No stronger service-area signal was detected; staff verification is required.' };
+   for (const rule of DEPARTMENT_RULES) {
+-    const score = rule.words.reduce((count, word) => count + (haystack.includes(normalize(word)) ? 1 : 0), 0);
++    const score = rule.words.reduce((count, word) => count + (containsTerm(haystack, word) ? 1 : 0), 0);
+     if (score > best.score) best = { id: rule.id, score, label: rule.label };
+   }
+   return { departmentId: best.id, departmentReason: best.label };
+@@ -56,10 +74,12 @@
+ 
+ export function severityAndSla(text: string, suppliedPriority?: IntelligenceInput['priority']) {
+   const haystack = normalize(text);
+-  const critical = ['live wire','exposed wire','electric shock','transformer spark','electric wire','power wire','sparking electric','major burst','life hazard','உயிர் ஆபத்து','மின்கம்பி','மின்மாற்றி'].some((x) => haystack.includes(normalize(x)));
+-  const high = ['sewage overflow','dengue','blocked road','mosquito','mosquito breeding','flooding','கழிவுநீர்','டெங்கு','கொசு'].some((x) => haystack.includes(normalize(x)));
++  const critical = ['live wire','exposed wire','electric shock','transformer spark','electric wire','power wire','sparking electric','major burst','life hazard','உயிர் ஆபத்து','மின்கம்பி','மின்மாற்றி'].some((x) => containsTerm(haystack, x));
++  const high = ['sewage overflow','dengue','blocked road','mosquito','mosquito breeding','flooding','கழிவுநீர்','டெங்கு','கொசு'].some((x) => containsTerm(haystack, x));
+   let severity: IntelligenceResult['severity'] = suppliedPriority || 'Medium';
+-  let reason = 'Routine operational impact; staff verification is required.';
++  let reason = suppliedPriority && suppliedPriority !== 'Medium'
++    ? 'Priority was supplied with the submission; staff verification is required.'
++    : 'Routine operational impact; staff verification is required.';
+   if (critical) { severity = 'Critical'; reason = 'Potential immediate safety hazard detected.'; }
+   else if (high && severity !== 'Critical') { severity = 'High'; reason = 'Potential public-health or significant service disruption detected.'; }
+   const slaDays = severity === 'Critical' ? 1 : severity === 'High' ? 3 : severity === 'Medium' ? 7 : 14;
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { routeDepartment, scoreDuplicate, severityAndSla, tokenize } from '../server/grievanceIntelligence';
+
+const TAMIL_WATER = 'குடிநீர் குழாய் உடைந்து தண்ணீர் வீணாகிறது';
+
+test('Tamil text is tokenised into whole words, not single consonants', () => {
+  const tokens = tokenize(TAMIL_WATER);
+  assert.ok(tokens.includes('குழாய்'));
+  assert.ok(tokens.length >= 4);
+});
+
+test('identical Tamil complaints score 1 for duplicate detection', () => {
+  assert.equal(scoreDuplicate(TAMIL_WATER, TAMIL_WATER), 1);
+});
+
+test('Tamil complaints still route to the right department and severity', () => {
+  assert.equal(routeDepartment(TAMIL_WATER).departmentId, 'dept-water');
+  assert.equal(severityAndSla('கழிவுநீர் தெருவில் தேங்கியுள்ளது').severity, 'High');
+});
+
+test('short Latin keywords must match whole words ("min" is not "minutes")', () => {
+  assert.notEqual(routeDepartment('Garbage not collected for 10 minutes').departmentId, 'dept-electric');
+});
+
+test('plural and stem forms of longer keywords still match', () => {
+  assert.equal(routeDepartment('Broken wires hanging near the school').departmentId, 'dept-electric');
+  assert.equal(routeDepartment('Many potholes on the main road').departmentId, 'dept-roads');
+});
+
+test('a submitter-supplied priority is not described as routine impact', () => {
+  const result = severityAndSla('Garbage pile near temple', 'Critical');
+  assert.equal(result.severity, 'Critical');
+  assert.doesNotMatch(result.severityReason, /Routine/);
+});
