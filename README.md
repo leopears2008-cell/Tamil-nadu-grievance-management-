@@ -321,4 +321,251 @@ The landing page photograph of Fort St. George, Chennai is loaded from Wikimedia
 **Report. Route. Resolve.**
 
 </div>
-      
+# Tamil-nadu-grievance-management project audit
+
+<img src="assets/score-card.svg" alt="Audit score card: 60 out of 100" width="100%">
+
+**Overall mark: 60 / 100 (6.0 out of 10), scored on the repository exactly as uploaded.**
+Estimated after fixes F-01 to F-08 and the full push: **78 to 84 / 100**. That estimate is a judgement, not a measurement.
+
+## 1. Scope and method
+
+| Item | Detail |
+| --- | --- |
+| Reviewed | `Tamil-nadu-grievance-management--main.zip`: 57 files, 1,282 lines of TypeScript, 604 lines of SQL, 12 test files with 40 test cases |
+| Read in full | All server modules, scripts, config, migrations 003 to 005, all tests, all docs |
+| Executed | The routing, severity, duplicate and workflow modules were run under Node 22 against probe inputs; the patch and new tests were run against both the original and fixed code |
+| Not executed | `npm install`, `npm run build`, `npm test` (the snapshot cannot build, see F-01); no network or live Supabase, Firebase, Gemini or Upstash calls |
+| Assumption | The missing files exist in the GitHub repository and this zip is a partial push. If they do not, F-01 is a larger problem than scored |
+
+Each finding below is marked **Executed** (reproduced by running code) or **Static** (found by reading, not reproduced).
+
+## 2. Scorecard
+
+| Category | Score | Why |
+| --- | --- | --- |
+| Architecture and design | 12 / 15 | Clear split between client, API and database; adapter boundary for news; fail-closed production config; RLS plus server mediation. Loses points for stale deployment config and duplicated sources of truth |
+| Security | 15 / 20 | Strong controls: signature-checked uploads, scan gate, private bucket, immutable audit log, column-guard trigger. Loses points for a non-atomic rate limiter, a fragile scanner verdict check, unbounded metrics keys and no CSP |
+| Correctness and code quality | 12 / 20 | Readable, typed code, but the intelligence module breaks Tamil text entirely and has substring false positives (F-03, F-04). That matters most for a Tamil Nadu platform |
+| Testing and QA | 8 / 15 | 40 cases and a golden set are a good start. Many tests only assert that strings exist in source files, nothing covers Tamil, authorization or RLS, and 27 of 40 cases cannot run in this snapshot |
+| CI/CD and deployment | 4 / 10 | The only workflow runs Deno on a Node project; `render.yaml` still lists the removed Firestore variable and omits the Supabase ones; no lockfile |
+| Documentation | 6 / 10 | The `docs/` folder is thorough and honest about limits. The README was two lines (replaced by this delivery). Docs mix `bun` and `npm`, and one file claims "10/10" |
+| Completeness of upload | 3 / 10 | `server.ts`, `src/App.tsx`, `src/index.css`, the route and AI modules and most components are missing, so the project cannot build or start |
+| **Total** | **60 / 100** | |
+
+## 3. Strengths worth keeping
+
+- **Security posture is deliberate.** Uploads are checked by magic bytes against the declared type, scanned (and rejected in production if no scanner is configured), stored in a private bucket and served by an authenticated proxy.
+- **Database enforces what the app promises.** RLS on every table, a guard trigger that limits which grievance columns each role can change, and an audit log that cannot be updated or deleted.
+- **Workflow is a small, testable pure function.** `canTransition` and `officerCanTransition` are easy to reason about, and the lifecycle test covers the main paths.
+- **AI is advisory by design.** The intelligence module labels every output as needing staff verification, and the evaluation harness includes injection and hallucination probes.
+- **Honest documentation.** `AI_EVALUATION.md` and `NEWS_PROVIDER.md` state limits plainly instead of overselling.
+
+## 4. Findings
+
+Severity: **P0** blocks running or shipping, **P1** wrong behaviour or real risk, **P2** hygiene.
+
+| ID | Sev | Area | Finding | Evidence |
+| --- | --- | --- | --- | --- |
+| F-01 | P0 | Completeness | Files that `package.json`, `main.tsx`, `index.html` and the tests import are absent: `server.ts`, `src/App.tsx`, `src/index.css`, `server/aiEvaluation.ts`, `server/grievanceRoutes.ts`, `server/newsProvider.ts`, `src/data/tnMinisters.ts`, `src/services/api.ts`, four components (`HeroSection`, `GrievanceChatbot`, `GrievanceForm`, `AdminSettings`), `scripts/migrate-firestore-to-supabase.mjs`, `public/og-image.png`. Build, dev, lint and 7 of 12 test files fail | Static (import analysis) |
+| F-02 | P0 | CI | `.github/workflows/deno.yml` runs `deno lint` and `deno test -A` on a Node, npm, `node:test` project. It will fail or test nothing, and gives false confidence either way | Static |
+| F-03 | P1 | Correctness | Tamil text is destroyed by `normalize()`. The regex `[^\p{L}\p{N}\s]` strips Tamil vowel signs and the pulli because they are combining marks (`\p{M}`), so words shatter into single consonants. `tokenize()` returns `[]` for Tamil, so **duplicate detection scores 0 even for identical Tamil complaints**. Routing only works by accident because the dictionary is mangled the same way | Executed: tokens `[]`, duplicate score `0` |
+| F-04 | P1 | Correctness | Keyword matching uses `String.includes`, so short terms match inside other words. "Garbage not collected for 10 minutes" scores an Electrical hit from `min` and routes to the Electrical department. `tar`, `bus`, `bin` and `light` have the same exposure | Executed: routed to `dept-electric` |
+| F-05 | P1 | Security | Rate limiter does `INCR` then `EXPIRE` as two requests. If the process stops or the second call fails after the first, the counter has no TTL and that key stays blocked until someone deletes it. The reported `resetAt` is also only an estimate | Static |
+| F-06 | P1 | Deployment | `render.yaml` declares `FIRESTORE_DATABASE_ID` (removed by the Supabase migration) and omits `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `PUBLIC_API_URL` and every hardening variable that `validate-production.mjs` requires | Static |
+| F-07 | P1 | Security | Malware verdict is `/infected\|malware\|virus\|found/i`. A clean reply such as "No threats found" is rejected, while any unrecognised reply that avoids those words is accepted. Verdict parsing should fail closed on anything but an explicit OK | Executed: "No threats found" blocked |
+| F-08 | P1 | Reliability | `observability.ts` keys metrics by `req.path` when no route matched, so a scanner hitting random URLs grows the in-memory `Map` without bound (only the snapshot is capped at 100). `localBuckets` in the rate limiter is also never pruned | Static |
+| F-09 | P2 | Correctness | When the submitter supplies `Critical` and no keyword matches, the result says "Routine operational impact" next to severity `Critical` | Executed |
+| F-10 | P2 | Robustness | `canTransition` throws a `TypeError` for any status not in the table (for example a legacy database value) instead of returning `false` | Executed |
+| F-11 | P2 | Database | Two files share the prefix `003_` and there is no `002_`. The Supabase CLI uses the numeric prefix as the version key, so duplicates can collide | Static |
+| F-12 | P2 | Build | No `package-lock.json` in the upload, so builds are not reproducible and `npm ci` cannot be used in CI | Static |
+| F-13 | P2 | Testing | `grievance.chatbot`, `hero.cinematic`, `site.settings` and part of `supabase.migration` assert that strings exist in source files. They break on harmless refactors and pass on broken behaviour. Nothing tests Tamil input, API authorization, or RLS policies. `news.test.ts` also assigns `process.env.X = originalValue` where the original may be `undefined`; Node stores that as the string `"undefined"` | Static (Node documents the coercion) |
+| F-14 | P2 | Docs | `AI_EVALUATION.md` says `bun run`, everything else uses `npm`, and `tsconfig.json` loads `bun-types` for a Node runtime. `docs/PRODUCTION_10_10.md` claims a perfect score this audit does not support | Static |
+| F-15 | P2 | Frontend | `index.html` references `/og-image.png` (missing) and preloads a Wikimedia image on every page load, a third-party request before first paint | Static |
+| F-16 | P2 | Security | `vercel.json` sets four good headers but no `Content-Security-Policy` | Static |
+| F-17 | P2 | Performance | `vite.config.ts` raises `chunkSizeWarningLimit` to 1000 kB, which hides bundle growth instead of fixing it | Static |
+| F-18 | Info | Security | `firebase-applet-config.json` holds a Firebase web API key. That is a client identifier and public by design, but it should be restricted by authorised domains and protected with Firebase App Check | Static |
+
+## 5. Security review
+
+**Good:** server-side token verification, admin allowlist, RLS everywhere, column-guard and audit triggers, signature-checked and scanned evidence, private bucket with proxy, workflow enforcement, strict body limits, fail-closed `validate:production`.
+
+**Gaps:** F-05, F-07, F-08 and F-16 above. Also worth confirming once the missing route file is pushed: that every route checks the caller's role and ownership before touching Supabase with the service-role key (it bypasses RLS), and that the chatbot endpoint is rate limited separately from reads.
+
+## 6. Performance review
+
+- `storage.ts` calls `getBucket` on every upload and may call `createBucket`. Cache a "bucket verified" flag per process.
+- Evidence travels as a base64 data URL inside JSON, roughly 33% larger than the file (about 540 KB for a 400 KB image). Fine at today's limit; switch to signed upload URLs if the limit rises.
+- The rate limiter makes two sequential Redis calls on the first request of each window. The F-05 fix makes it exactly one.
+- Jaccard scoring is linear in the number of candidates. The route that selects candidates is not in the upload; restrict candidates by district, category and a recent time window.
+
+## 7. Edge cases checked or worth testing
+
+| Case | Result |
+| --- | --- |
+| Tamil-only complaint | Broken before F-03 fix, correct after |
+| Mixed Tamil and English | Works after the fix (each script handled separately) |
+| Tanglish spellings (`thanni`, `kuzhai`) | Only the few listed spellings match; add variants as real data arrives |
+| Plural and stem forms (`wires`, `potholes`) | Still match after the F-04 fix |
+| Unknown or legacy status | Throws before F-10 fix |
+| Evidence exactly at the size limit | Accepted (only larger is rejected) |
+| Declared PNG that is really JPEG | Rejected by signature check (covered by an existing test) |
+
+## 8. Fixes delivered and verified
+
+The patch and tests are in [`fixes/`](../fixes). I ran them: the patch applies cleanly with `git apply -p1`, the repository's own 6 intelligence and workflow tests still pass, and the 6 new tests pass on the fixed code while 4 of them fail on the original.
+
+```bash
+git apply -p1 fixes/grievanceIntelligence.patch          # F-03, F-04, F-09
+cp fixes/tests/grievance.intelligence.tamil.test.ts tests/
+# then add tests/grievance.intelligence.tamil.test.ts to the "test" script in package.json
+```
+
+### F-10: unknown status must not throw (`server/workflow.ts`)
+
+```ts
+export function canTransition(from: GrievanceStatus, to: GrievanceStatus) {
+  return from === to || (transitions[from]?.includes(to) ?? false);
+}
+```
+
+### F-05: atomic rate limit (`server/distributedRateLimit.ts`)
+
+Replace everything from `const redisKey` to the final `return` of the distributed branch. Upstash documents a `/multi-exec` endpoint that runs a transaction atomically and returns results in command order. Check the response shape against the current Upstash REST docs before shipping.
+
+```ts
+const redisKey = `Tamil-nadu-grievance-management:rl:${encodePart(key)}`;
+const response = await fetch(`${url}/multi-exec`, {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify([
+    ['SET', redisKey, '0', 'EX', String(windowSeconds), 'NX'],
+    ['INCR', redisKey],
+    ['PTTL', redisKey],
+  ]),
+});
+if (!response.ok) throw new Error(`Rate-limit store returned HTTP ${response.status}`);
+const body = await response.json() as Array<{ result?: number | string | null; error?: string }>;
+const count = Number(body?.[1]?.result);
+const ttlMs = Number(body?.[2]?.result);
+if (!Number.isFinite(count)) throw new Error('Invalid rate-limit store response.');
+
+const resetAt = Date.now() + (Number.isFinite(ttlMs) && ttlMs > 0 ? ttlMs : windowSeconds * 1000);
+return { allowed: count <= limit, remaining: Math.max(limit - count, 0), resetAt, distributed: true };
+```
+
+And prune the local fallback so it cannot grow forever (F-08). Add this function and call `pruneExpired(now);` right after `const now = Date.now();` in `localLimit`:
+
+```ts
+function pruneExpired(now: number) {
+  if (localBuckets.size < 5_000) return;
+  for (const [bucketKey, bucket] of localBuckets) {
+    if (bucket.resetAt <= now) localBuckets.delete(bucketKey);
+  }
+}
+```
+
+### F-08: bounded metric keys (`server/observability.ts`)
+
+```ts
+function routeKey(req: Request) {
+  // Unmatched paths (404s, scanners) share one bucket so the Map cannot grow without bound.
+  return req.route?.path
+    ? `${req.method} ${req.baseUrl}${String(req.route.path)}`
+    : `${req.method} UNMATCHED`;
+}
+```
+
+### F-07: fail-closed scanner verdict (`server/storage.ts`)
+
+This assumes a clamd-compatible reply (`stream: OK` or `stream: <signature> FOUND`). If your scanner returns JSON, parse its explicit verdict field instead, and keep the rule that anything unrecognised is rejected.
+
+```ts
+const result = (await response.text()).trim();
+if (/FOUND\s*$/m.test(result)) throw new Error('Uploaded evidence failed malware scanning.');
+if (!/\bOK\s*$/m.test(result)) throw new Error('Malware scanner returned an unrecognised verdict.');
+return;
+```
+
+### F-02: replace the Deno workflow
+
+Delete `.github/workflows/deno.yml` and add `.github/workflows/ci.yml`. Commit `package-lock.json` first (F-12), because `npm ci` requires it.
+
+```yaml
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run evaluate:ai
+      - run: npm run build
+```
+
+### F-06: `render.yaml` environment
+
+Replace `FIRESTORE_DATABASE_ID` and extend the list. Keep `sync: false` so values are entered in the Render dashboard and never committed.
+
+```yaml
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVE_CLIENT
+        value: "false"
+      - key: GRIEVANCE_STORAGE_BUCKET
+        value: grievance-evidence
+      - key: NEWS_PROVIDER
+        value: newsapi
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PUBLIC_API_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+      - key: CLAMAV_SCAN_URL
+        sync: false
+      - key: OBSERVABILITY_WEBHOOK_URL
+        sync: false
+      - key: NEWS_API_KEY
+        sync: false
+```
+
+### F-11: migration numbering
+
+Rename `003_site_settings.sql` to `002_site_settings.sql`. It depends on nothing else, and this fills the gap. **Do not rename if you have already applied migrations with the Supabase CLI**, because the recorded versions would no longer match.
+
+## 9. Path to 85 and above
+
+1. Push the missing files (F-01), then run `npm install`, `npm run lint`, `npm test` and `npm run build` and fix whatever surfaces.
+2. Replace the Deno workflow with the Node CI above and commit the lockfile (F-02, F-12).
+3. Apply the patch and the six fixes above (F-03 to F-10), and fix the render config (F-06).
+4. Replace source-string tests with behaviour tests: API authorization per role, a Tamil golden set, and at least one RLS test against a local Supabase.
+5. Add a Content-Security-Policy in report-only mode first (F-16), then enforce it.
+6. Rename `PRODUCTION_10_10.md` to a checklist and drop the claim until an audit supports it (F-14). Pick `npm` or `bun` and use it everywhere.
+7. Add a `LICENSE` file and a `SECURITY.md` with a reporting contact.      
