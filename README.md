@@ -1,4 +1,89 @@
 
+  <title id="t">Tamil-nadu-grievance-management - Report. Route. Resolve.</title>
+  <desc id="d">Animated wordmark for the Tamil Nadu grievance management repository, an AI-assisted public grievance redressal platform for Tamil Nadu.</desc>
+  <style>
+    .l{font:700 56px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#FAFAFA;text-anchor:middle;animation:drop .75s cubic-bezier(.2,.8,.2,1) both}
+    .l.ai{fill:#E7A817}
+    .t{font:500 26px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;fill:#D4D4D8;text-anchor:middle;animation:pop .01s steps(1) both}
+    .t.dot{fill:#E7A817}
+    .tag{font:500 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:3px;fill:#A1A1AA;animation:fade .8s ease .1s both}
+    .foot{font:500 13px 'JetBrains Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:2px;fill:#71717A;text-anchor:middle;animation:fade .9s ease 2.79s both}
+    .rule{stroke:#E7A817;stroke-width:3;stroke-linecap:round;stroke-dasharray:1054;animation:draw .9s cubic-bezier(.6,0,.2,1) 1.2s both}
+    .mark{animation:fade 1s ease .5s both}
+    .cur{fill:#E7A817;opacity:0;animation:blink 1.1s steps(1) 2.73s infinite}
+    @keyframes drop{0%{opacity:0;transform:translateY(-38px)}60%{opacity:1;transform:translateY(7px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes pop{from{opacity:0}to{opacity:1}}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
+    @keyframes draw{from{stroke-dashoffset:1054}to{stroke-dashoffset:0}}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}.cur{opacity:0}}
+  </style>
+  <defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#fff" fill-opacity=".055"/></pattern></defs>
+  <rect x=".5" y=".5" width="1199" height="379" rx="18" fill="#09090B" stroke="#fff" stroke-opacity=".10"/>
+  <rect x=".5" y=".5" width="1199" height="379" rx="18" fill="url(#dots)"/>
+  <line x1="28" y1="1" x2="1172" y2="1" stroke="#fff" stroke-opacity=".14"/>
+  <text class="tag" x="60" y="62">PUBLIC GRIEVANCE REDRESSAL  /  TAMIL NADU</text>
+  <g>
+    <text class="l ai" x="90.0" y="200" style="animation-delay:0.25s">T</text>
+    <text class="l ai" x="124.0" y="200" style="animation-delay:0.31s">a</text>
+    <text class="l ai" x="158.0" y="200" style="animation-delay:0.37s">m</text>
+    <text class="l ai" x="192.0" y="200" style="animation-delay:0.43s">i</text>
+    <text class="l ai" x="226.0" y="200" style="animation-delay:0.49s">l</text>
+    <text class="l ai" x="260.0" y="200" style="animation-delay:0.55s">-</text>
+    <text class="l ai" x="294.0" y="200" style="animation-delay:0.61s">n</text>
+    <text class="l ai" x="328.0" y="200" style="animation-delay:0.67s">a</text>
+    <text class="l ai" x="362.0" y="200" style="animation-delay:0.73s">d</text>
+    <text class="l ai" x="396.0" y="200" style="animation-delay:0.79s">u</text>
+    <text class="l ai" x="430.0" y="200" style="animation-delay:0.85s">-</text>
+    <text class="l" x="464.0" y="200" style="animation-delay:0.91s">g</text>
+    <text class="l" x="498.0" y="200" style="animation-delay:0.97s">r</text>
+    <text class="l" x="532.0" y="200" style="animation-delay:1.03s">i</text>
+    <text class="l" x="566.0" y="200" style="animation-delay:1.09s">e</text>
+    <text class="l" x="600.0" y="200" style="animation-delay:1.15s">v</text>
+    <text class="l" x="634.0" y="200" style="animation-delay:1.21s">a</text>
+    <text class="l" x="668.0" y="200" style="animation-delay:1.27s">n</text>
+    <text class="l" x="702.0" y="200" style="animation-delay:1.33s">c</text>
+    <text class="l" x="736.0" y="200" style="animation-delay:1.39s">e</text>
+    <text class="l" x="770.0" y="200" style="animation-delay:1.45s">-</text>
+    <text class="l" x="804.0" y="200" style="animation-delay:1.51s">m</text>
+    <text class="l" x="838.0" y="200" style="animation-delay:1.57s">a</text>
+    <text class="l" x="872.0" y="200" style="animation-delay:1.63s">n</text>
+    <text class="l" x="906.0" y="200" style="animation-delay:1.69s">a</text>
+    <text class="l" x="940.0" y="200" style="animation-delay:1.75s">g</text>
+    <text class="l" x="974.0" y="200" style="animation-delay:1.81s">e</text>
+    <text class="l" x="1008.0" y="200" style="animation-delay:1.87s">m</text>
+    <text class="l" x="1042.0" y="200" style="animation-delay:1.93s">e</text>
+    <text class="l" x="1076.0" y="200" style="animation-delay:1.99s">n</text>
+    <text class="l" x="1110.0" y="200" style="animation-delay:2.05s">t</text>
+    </g>
+  <line class="rule" x1="73" y1="226" x2="1127" y2="226"/>
+  <g>
+    <text class="t" x="424.0" y="292" style="animation-delay:1.550s">R</text>
+    <text class="t" x="440.0" y="292" style="animation-delay:1.595s">e</text>
+    <text class="t" x="456.0" y="292" style="animation-delay:1.640s">p</text>
+    <text class="t" x="472.0" y="292" style="animation-delay:1.685s">o</text>
+    <text class="t" x="488.0" y="292" style="animation-delay:1.730s">r</text>
+    <text class="t" x="504.0" y="292" style="animation-delay:1.775s">t</text>
+    <text class="t dot" x="520.0" y="292" style="animation-delay:1.820s">.</text>
+    <text class="t" x="552.0" y="292" style="animation-delay:1.910s">R</text>
+    <text class="t" x="568.0" y="292" style="animation-delay:1.955s">o</text>
+    <text class="t" x="584.0" y="292" style="animation-delay:2.000s">u</text>
+    <text class="t" x="600.0" y="292" style="animation-delay:2.045s">t</text>
+    <text class="t" x="616.0" y="292" style="animation-delay:2.090s">e</text>
+    <text class="t dot" x="632.0" y="292" style="animation-delay:2.135s">.</text>
+    <text class="t" x="664.0" y="292" style="animation-delay:2.225s">R</text>
+    <text class="t" x="680.0" y="292" style="animation-delay:2.270s">e</text>
+    <text class="t" x="696.0" y="292" style="animation-delay:2.315s">s</text>
+    <text class="t" x="712.0" y="292" style="animation-delay:2.360s">o</text>
+    <text class="t" x="728.0" y="292" style="animation-delay:2.405s">l</text>
+    <text class="t" x="744.0" y="292" style="animation-delay:2.450s">v</text>
+    <text class="t" x="760.0" y="292" style="animation-delay:2.495s">e</text>
+    <text class="t dot" x="776.0" y="292" style="animation-delay:2.540s">.</text>
+    </g>
+  <rect class="cur" x="788" y="271" width="11" height="26" rx="1.5"/>
+  <text class="foot" x="600" y="346">TAMIL  /  ENGLISH  /  TANGLISH      AI-ASSISTED TRIAGE      SUPABASE + FIREBASE AUTH</text>
+</svg>
+
 
   <title id="t">Tamil-nadu-grievance-management - Report. Route. Resolve.</title>
   <desc id="d">Animated wordmark for the Tamil Nadu grievance management repository, an AI-assisted public grievance redressal platform for Tamil Nadu.</desc>
