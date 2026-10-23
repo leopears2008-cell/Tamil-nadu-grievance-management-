@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import {
-  ShieldAlert, CheckCircle2, Clock, MapPin, Camera, ThumbsUp, QrCode,
+  ShieldAlert, Clock, MapPin, Camera, ThumbsUp, QrCode,
   Flame, Building2, Award, Volume2
 } from 'lucide-react';
 
@@ -63,7 +63,6 @@ export default function CivicPowerFeatures({ language = 'en' }: { language?: 'en
   const [emergencyMode, setEmergencyMode] = useState(false);
   const [otpInput, setOtpInput] = useState('');
   const [otpMessage, setOtpMessage] = useState('');
-  const [verifiedId, setVerifiedId] = useState<string | null>(null);
 
   const handleUpvote = (id: string) => {
     if (upvotedIds[id]) return;
@@ -80,7 +79,7 @@ export default function CivicPowerFeatures({ language = 'en' }: { language?: 'en
     }
   };
 
-  const verifyOtp = (event: FormEvent<HTMLFormElement>, issueId: string) => {
+  const verifyOtp = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setOtpMessage('Demo only: connect a server-verified OTP service before allowing petition closure.');
     // Deliberately do not mark the grievance as verified using client-side input alone.
@@ -146,7 +145,7 @@ export default function CivicPowerFeatures({ language = 'en' }: { language?: 'en
 
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3">
                   <button type="button" onClick={() => handleUpvote(issue.id)} className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold ${upvotedIds[issue.id] ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-300' : 'border-white/10 bg-white/5 hover:bg-amber-500 hover:text-slate-950'}`}><ThumbsUp className="h-3.5 w-3.5" />{upvotedIds[issue.id] ? 'Demo vote recorded' : 'Affects me too'} • {issue.supporters} sample supporters</button>
-                  {issue.afterImg ? verifiedId === issue.id ? <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400"><CheckCircle2 className="h-4 w-4" />Server verified</span> : <form onSubmit={e => verifyOtp(e, issue.id)} className="flex flex-wrap items-center gap-2"><input aria-label="OTP (demo)" inputMode="numeric" pattern="[0-9]*" maxLength={6} value={otpInput} onChange={e => setOtpInput(e.target.value.replace(/\D/g, ''))} placeholder="OTP (demo)" className="w-24 rounded-lg border border-white/15 bg-slate-950 px-2.5 py-1.5 text-xs text-white" /><button type="submit" className="rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-emerald-400">Request verify</button></form> : <span className="inline-flex items-center gap-1 text-xs text-slate-400"><QrCode className="h-3.5 w-3.5 text-amber-400" />Demo receipt</span>}
+                  {issue.afterImg ? <form onSubmit={verifyOtp} className="flex flex-wrap items-center gap-2"><input aria-label="OTP (demo)" inputMode="numeric" pattern="[0-9]*" maxLength={6} value={otpInput} onChange={e => setOtpInput(e.target.value.replace(/\D/g, ''))} placeholder="OTP (demo)" className="w-24 rounded-lg border border-white/15 bg-slate-950 px-2.5 py-1.5 text-xs text-white" /><button type="submit" className="rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-emerald-400">Request verify</button></form> : <span className="inline-flex items-center gap-1 text-xs text-slate-400"><QrCode className="h-3.5 w-3.5 text-amber-400" />Demo receipt</span>}
                 </div>
                 {otpMessage && <p role="status" className="text-xs text-amber-300">{otpMessage}</p>}
               </article>
