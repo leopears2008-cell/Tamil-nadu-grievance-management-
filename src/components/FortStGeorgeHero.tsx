@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import type { FormEvent } from 'react';
 import { ArrowRight, Building2, CheckCircle2, Clock3, FileText, Languages, MapPin, Mic, MicOff, Search, ShieldCheck, Sparkles, Waves } from 'lucide-react';
 
 type Props = {
@@ -63,7 +64,7 @@ export default function FortStGeorgeHero({ onQuickFile, onTrackPetition, languag
     recognition.start();
   };
 
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (mode === 'file' && inputText.trim()) onQuickFile?.(inputText.trim(), triage.category);
     if (mode === 'track' && trackingId.trim()) onTrackPetition?.(trackingId.trim());
