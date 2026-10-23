@@ -1,4 +1,5 @@
 import FortStGeorgeHero from './components/FortStGeorgeHero';
+import CivicPowerFeatures from './components/CivicPowerFeatures';
 
 export default function App() {
   const handleQuickFile = (draftText: string, detectedCategory: string) => {
@@ -13,5 +14,10 @@ export default function App() {
     window.alert(`Tracking requested for ${petitionId}. Connect the petition-status API to retrieve its live status.`);
   };
 
-  return <FortStGeorgeHero onQuickFile={handleQuickFile} onTrackPetition={handleTrackPetition} />;
+  return (
+    <>
+      <FortStGeorgeHero onQuickFile={handleQuickFile} onTrackPetition={handleTrackPetition} />
+      <CivicPowerFeatures />
+    </>
+  );
 }
